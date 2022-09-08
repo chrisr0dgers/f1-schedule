@@ -1,0 +1,18 @@
+.result {
+  &_fullResult {
+    text-align: right;
+    cursor: pointer;
+  }
+  &_podiumFinisher {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  &_time {
+    font-weight: bold;
+  }
+  &--tableWrapper {
+    max-height: 470px;
+    overflow: auto;
+  }
+}

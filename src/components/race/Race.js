@@ -11,7 +11,7 @@ const Race = (props) => {
 
   // Determine if race has already been run
   const isInThePast = (date) => {
-    const raceDate = new Date(`${props.event.date} ${props.event.time}`);
+    const raceDate = new Date(`${props.event.date}T${props.event.time}`);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -70,7 +70,7 @@ const Race = (props) => {
 
   // Format time
   const getTime = (time) => {
-    return new Date(`${props.event.date} ${time}`).toLocaleTimeString([], {
+    return new Date(`${props.event.date}T${time}`).toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
     });

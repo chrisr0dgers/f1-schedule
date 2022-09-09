@@ -39,7 +39,7 @@ const Race = (props) => {
 
       // Championship standings after race
       fetch(
-        `http://ergast.com/api/f1/2022/${props.event.round}/driverStandings.json`
+        `https://ergast.com/api/f1/2022/${props.event.round}/driverStandings.json`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -53,7 +53,7 @@ const Race = (props) => {
 
       // Construtor standings after race
       fetch(
-        `http://ergast.com/api/f1/2022/${props.event.round}/constructorStandings.json`
+        `https://ergast.com/api/f1/2022/${props.event.round}/constructorStandings.json`
       )
         .then((response) => response.json())
         .then((data) => {

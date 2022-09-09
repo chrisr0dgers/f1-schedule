@@ -55,7 +55,7 @@ const RaceResult = (props) => {
           <Tabs
             defaultActiveKey="race"
             id="justify-tab-example"
-            className="mb-3"
+            className="mb-3 flex-nowrap"
             justify
           >
             {/* Full race standings */}

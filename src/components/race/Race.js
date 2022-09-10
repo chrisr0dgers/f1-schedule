@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RaceHeader from "./RaceHeader";
-
+import style from './race.module.scss'
 import RaceResult from "./RaceResult";
 import RaceSchedule from "./RaceSchedule";
 
@@ -90,7 +90,11 @@ const Race = (props) => {
 
   return (
     <div className={'"row"'}>
-      <div className="col-md-6 mx-auto card my-3">
+      <div
+        className={`${
+          isInThePast() && style.race_pastEvent
+        } col-md-6 mx-auto card my-3`}
+      >
         <RaceHeader
           country={props.event.Circuit.Location.country}
           circuitName={props.event.Circuit.circuitName}

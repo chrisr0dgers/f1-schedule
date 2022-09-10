@@ -1,13 +1,37 @@
+import style from "./RaceSchedule.module.scss";
+
 const RaceSchedule = (props) => {
   return (
     <div className="card-body">
-      <div>FP1: {props.schedule.fp1}</div>
-      <div>FP2: {props.schedule.fp2}</div>
-      <div>
-        {props.schedule.fp3 && <div>FP3: {props.schedule.fp3}</div>}
-        {props.schedule.Sprint && <div>Sprint: {props.schedule.sprintRace}</div>}
+      <h4 className="mb-3">Schedule</h4>
+      <div className="d-sm-flex">
+        <div className={style["raceSchedule_practice"]}>
+          <p>
+            <strong>FP1:</strong> {props.schedule.fp1}
+          </p>
+          <p>
+            <strong>FP2:</strong> {props.schedule.fp2}
+          </p>
+          {props.schedule.fp3 && (
+            <p className="mb-0">
+              <strong>FP3:</strong> {props.schedule.fp3}
+            </p>
+          )}
+        </div>
+        <div className={style["raceSchedule_race"]}>
+          {props.schedule.Sprint && (
+            <p>
+              <strong>Sprint:</strong> {props.schedule.sprintRace}
+            </p>
+          )}
+          <p>
+            <strong>Qualifying:</strong> {props.schedule.quali}
+          </p>
+          <p className="">
+            <strong>Race:</strong> {props.schedule.raceTime}
+          </p>
+        </div>
       </div>
-      <div>Qualifying: {props.schedule.quali}</div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EventHeader from "./RaceHeader";
+import RaceHeader from "./RaceHeader";
 
 import RaceResult from "./RaceResult";
 import RaceSchedule from "./RaceSchedule";
@@ -85,27 +85,30 @@ const Race = (props) => {
     }),
     quali: getTime(props.event.Qualifying.time),
     ...(props.event.Sprint && { sprintRace: getTime(props.event.Sprint.time) }),
+    raceTime: getTime(props.event.time),
   };
 
   return (
     <div className={'"row"'}>
       <div className="col-md-6 mx-auto card my-3">
-        <EventHeader
+        <RaceHeader
           country={props.event.Circuit.Location.country}
           circuitName={props.event.Circuit.circuitName}
           date={eventDateRange}
-          raceTime={getTime(props.event.time)}
         />
-        {!isInThePast() && <RaceSchedule schedule={raceSchedule} />}
+        <div className="d-sm-flex flex-fill">
+          {/* {!isInThePast() && <RaceSchedule schedule={raceSchedule} />} */}
+          <RaceSchedule schedule={raceSchedule} />
 
-        {isInThePast() && raceResult.Results !== undefined && (
-          <RaceResult
-            raceName={props.event.raceName}
-            result={raceResult.Results}
-            championship={championshipStanding}
-            constructors={constructorsStanding}
-          />
-        )}
+          {isInThePast() && raceResult.Results !== undefined && (
+            <RaceResult
+              raceName={props.event.raceName}
+              result={raceResult.Results}
+              championship={championshipStanding}
+              constructors={constructorsStanding}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

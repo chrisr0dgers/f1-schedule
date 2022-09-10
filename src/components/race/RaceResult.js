@@ -18,8 +18,7 @@ const RaceResult = (props) => {
 
   return (
     <div className="card-body">
-      <h3>Race Result</h3>
-
+      <h4 className="mb-3">Race Result</h4>
       <div>
         {props.result.slice(0, 3).map((driver) => {
           return (
@@ -39,8 +38,7 @@ const RaceResult = (props) => {
           );
         })}
         <p
-          className={style.result_fullResult}
-          ml="auto"
+          className={`${style.result_fullResult} mb-0 mt-3`}
           variant="primary"
           onClick={handleShow}
         >

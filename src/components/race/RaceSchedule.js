@@ -17,13 +17,13 @@ const RaceSchedule = (props) => {
               <strong>FP3:</strong> {props.schedule.fp3}
             </p>
           )}
-        </div>
-        <div className={style["raceSchedule_race"]}>
-          {props.schedule.Sprint && (
+          {props.schedule.sprintRace && (
             <p>
               <strong>Sprint:</strong> {props.schedule.sprintRace}
             </p>
           )}
+        </div>
+        <div className={style["raceSchedule_race"]}>
           <p>
             <strong>Qualifying:</strong> {props.schedule.quali}
           </p>

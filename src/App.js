@@ -12,14 +12,14 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="row d-flex justify-content-center pt-3">
-          <div className="col-lg-3 col-6">
+          <div className="col-md-3 col-6">
             {dateState.toLocaleDateString("en-GB", {
               day: "numeric",
               month: "short",
               year: "numeric",
             })}
           </div>
-          <div className="col-lg-3 col-6 text-end">
+          <div className="col-md-3 col-6 text-end">
             {dateState.toLocaleString("en-US", {
               hour: "numeric",
               minute: "numeric",

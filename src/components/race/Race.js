@@ -90,6 +90,7 @@ const Race = (props) => {
 
   return (
     <div className={'"row"'}>
+      <a name={props.event.round}></a>
       <div
         className={`${
           isInThePast() && style.race_pastEvent

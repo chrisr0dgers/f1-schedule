@@ -17,7 +17,7 @@ const RaceResult = (props) => {
   // Bootstrap modal end
 
   return (
-    <div className="card-body">
+    <div className="w-100">
       <h4 className="mb-3">Race Result</h4>
       <div>
         {props.result.slice(0, 3).map((driver) => {

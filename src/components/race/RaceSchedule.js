@@ -4,7 +4,7 @@ const RaceSchedule = (props) => {
   return (
     <div className="card-body">
       <h4 className="mb-3">Schedule</h4>
-      <div className="d-sm-flex">
+      <div className="d-sm-flex pb-md-3">
         <div className={style["raceSchedule_practice"]}>
           <p>
             <strong>FP1:</strong> {props.schedule.fp1}

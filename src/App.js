@@ -24,7 +24,7 @@ function App() {
               hour: "numeric",
               minute: "numeric",
               second: "numeric",
-              hour12: true,
+              hour12: false,
             })}
           </div>
         </div>

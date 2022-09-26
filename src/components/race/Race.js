@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 import RaceHeader from "./RaceHeader";
 import style from "./race.module.scss";
 import RaceResult from "./RaceResult";
@@ -9,6 +10,7 @@ const Race = (props) => {
   const [raceResult, setraceResult] = useState([]);
   const [constructorsStanding, setConstructorsStanding] = useState([]);
   const [championshipStanding, setChampionshipStanding] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const endpoints = [
     // Results for current round
@@ -38,7 +40,7 @@ const Race = (props) => {
               .ConstructorStandings
           );
         }
-      );
+      ).finally(() => setIsLoaded(true));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -79,7 +81,7 @@ const Race = (props) => {
   };
 
   return (
-    <div className={'"row"'}>
+    <div className={`row ${style.race}`}>
       {/* eslint-disable-next-line */}
       <a name={props.event.round}></a>
       <div
@@ -93,16 +95,26 @@ const Race = (props) => {
           date={eventDateRange}
         />
         <div className="d-sm-flex flex-fill">
-          {/* {!isInThePast() && <RaceSchedule schedule={raceSchedule} />} */}
           <RaceSchedule schedule={raceSchedule} />
 
+          {isInThePast() && (
+            <div
+              className={`card-body justify-content-center align-items-center ${
+                isLoaded ? "d-none" : "d-flex"
+              }`}
+            >
+              <Spinner animation="grow" />
+            </div>
+          )}
           {isInThePast() && raceResult.Results !== undefined && (
-            <RaceResult
-              raceName={props.event.raceName}
-              result={raceResult.Results}
-              championship={championshipStanding}
-              constructors={constructorsStanding}
-            />
+            <div className={`card-body ${!isLoaded ? "d-none" : "d-flex"}`}>
+              <RaceResult
+                raceName={props.event.raceName}
+                result={raceResult.Results}
+                championship={championshipStanding}
+                constructors={constructorsStanding}
+              />
+            </div>
           )}
         </div>
       </div>

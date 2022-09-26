@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Event from "../race/Race";
 import Button from "react-bootstrap/Button";
 
@@ -7,31 +8,27 @@ const Calendar = () => {
   const [lastRount, setLastRound] = useState([]);
 
   useEffect(() => {
-    fetch("https://ergast.com/api/f1/2022.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setEvents(data.MRData.RaceTable.Races);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-  useEffect(() => {
-    fetch("https://ergast.com/api/f1/current/last/results.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setLastRound(+data.MRData.RaceTable.round + 1);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    const endpoints = [
+      `https://ergast.com/api/f1/current.json`,
+      `https://ergast.com/api/f1/current/last/results.json`,
+    ];
+    Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+      ([{ data: currentSeason }, { data: lastRaceResult }]) => {
+        setEvents(currentSeason.MRData.RaceTable.Races);
+        setLastRound(+lastRaceResult.MRData.RaceTable.round + 1);
+      }
+    );
   }, []);
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 mx-auto pt-3">
-          <Button className="mx-auto d-block" href={`#${lastRount}`} variant="primary">
+          <Button
+            className="mx-auto d-block"
+            href={`#${lastRount}`}
+            variant="primary"
+          >
             Next Race
           </Button>
         </div>

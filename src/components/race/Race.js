@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import RaceHeader from "./RaceHeader";
-import style from './race.module.scss'
+import style from "./race.module.scss";
 import RaceResult from "./RaceResult";
 import RaceSchedule from "./RaceSchedule";
 
@@ -9,8 +10,41 @@ const Race = (props) => {
   const [constructorsStanding, setConstructorsStanding] = useState([]);
   const [championshipStanding, setChampionshipStanding] = useState([]);
 
+  const endpoints = [
+    // Results for current round
+    `https://ergast.com/api/f1/2022/${props.event.round}/results.json`,
+    // Driver standings for current round
+    `https://ergast.com/api/f1/2022/${props.event.round}/driverStandings.json`,
+    // Contructor standing for current round
+    `https://ergast.com/api/f1/2022/${props.event.round}/constructorStandings.json`,
+  ];
+
+  // Get race result if event has passed
+  useEffect(() => {
+    if (isInThePast()) {
+      Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+        ([
+          { data: results },
+          { data: driverStandings },
+          { data: constructorStandings },
+        ]) => {
+          setraceResult(results.MRData.RaceTable.Races[0]);
+          setChampionshipStanding(
+            driverStandings.MRData.StandingsTable.StandingsLists[0]
+              .DriverStandings
+          );
+          setConstructorsStanding(
+            constructorStandings.MRData.StandingsTable.StandingsLists[0]
+              .ConstructorStandings
+          );
+        }
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Determine if race has already been run
-  const isInThePast = (date) => {
+  const isInThePast = () => {
     const raceDate = new Date(`${props.event.date}T${props.event.time}`);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -23,50 +57,6 @@ const Race = (props) => {
   ).getDate()}-${new Date(`${props.event.date}`).getDate()} ${new Date(
     `${props.event.date}`
   ).toLocaleString("default", { month: "short" })}`;
-
-  // Get race result if event has passed
-  useEffect(() => {
-    if (isInThePast()) {
-      // Race result
-      fetch(`https://ergast.com/api/f1/2022/${props.event.round}/results.json`)
-        .then((response) => response.json())
-        .then((data) => {
-          setraceResult(data.MRData.RaceTable.Races[0]);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-
-      // Championship standings after race
-      fetch(
-        `https://ergast.com/api/f1/2022/${props.event.round}/driverStandings.json`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setChampionshipStanding(
-            data.MRData.StandingsTable.StandingsLists[0].DriverStandings
-          );
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-
-      // Construtor standings after race
-      fetch(
-        `https://ergast.com/api/f1/2022/${props.event.round}/constructorStandings.json`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setConstructorsStanding(
-            data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
-          );
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // Format time
   const getTime = (time) => {
@@ -90,6 +80,7 @@ const Race = (props) => {
 
   return (
     <div className={'"row"'}>
+      {/* eslint-disable-next-line */}
       <a name={props.event.round}></a>
       <div
         className={`${

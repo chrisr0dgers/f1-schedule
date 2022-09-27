@@ -87,7 +87,7 @@ const Race = (props) => {
       <div
         className={`${
           isInThePast() && style.race_pastEvent
-        } col-md-6 mx-auto card my-3`}
+        } col-lg-7 col-md-9 mx-auto card my-3`}
       >
         <RaceHeader
           country={props.event.Circuit.Location.country}

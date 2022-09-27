@@ -37,7 +37,7 @@ const Calendar = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-6 mx-auto px-0 pt-3">
+        <div className="col-lg-7 col-md-9 mx-auto px-0 pt-3">
           <Button
             className="mx-auto d-block"
             href={`#${lastRount}`}

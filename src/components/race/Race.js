@@ -5,6 +5,11 @@ import RaceHeader from "./RaceHeader";
 import style from "./race.module.scss";
 import RaceResult from "./RaceResult";
 import RaceSchedule from "./RaceSchedule";
+import { CircularProgress, Grid } from "@mui/material";
+import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
+// import CardActions from "@mui/material/CardActions";
+// import CardContent from "@mui/material/CardContent";
 
 const Race = (props) => {
   const [raceResult, setraceResult] = useState([]);
@@ -24,23 +29,25 @@ const Race = (props) => {
   // Get race result if event has passed
   useEffect(() => {
     if (isInThePast()) {
-      Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-        ([
-          { data: results },
-          { data: driverStandings },
-          { data: constructorStandings },
-        ]) => {
-          setraceResult(results.MRData.RaceTable.Races[0]);
-          setChampionshipStanding(
-            driverStandings.MRData.StandingsTable.StandingsLists[0]
-              .DriverStandings
-          );
-          setConstructorsStanding(
-            constructorStandings.MRData.StandingsTable.StandingsLists[0]
-              .ConstructorStandings
-          );
-        }
-      ).finally(() => setIsLoaded(true));
+      Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
+        .then(
+          ([
+            { data: results },
+            { data: driverStandings },
+            { data: constructorStandings },
+          ]) => {
+            setraceResult(results.MRData.RaceTable.Races[0]);
+            setChampionshipStanding(
+              driverStandings.MRData.StandingsTable.StandingsLists[0]
+                .DriverStandings
+            );
+            setConstructorsStanding(
+              constructorStandings.MRData.StandingsTable.StandingsLists[0]
+                .ConstructorStandings
+            );
+          }
+        )
+        .finally(() => setIsLoaded(true));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -81,13 +88,13 @@ const Race = (props) => {
   };
 
   return (
-    <div className={`row ${style.race}`}>
+    <Grid item lg={7} md={8} xs={12} className={`row ${style.race}`}>
       {/* eslint-disable-next-line */}
       <a name={props.event.round}></a>
-      <div
-        className={`${
-          isInThePast() && style.race_pastEvent
-        } col-lg-7 col-md-9 mx-auto card my-3`}
+
+      <Card
+        className={`${isInThePast() && style.race_pastEvent} mx-auto my-3 p-3`}
+        variant="outlined"
       >
         <RaceHeader
           country={props.event.Circuit.Location.country}
@@ -98,27 +105,31 @@ const Race = (props) => {
           <RaceSchedule schedule={raceSchedule} />
 
           {isInThePast() && (
-            <div
-              className={`card-body justify-content-center align-items-center ${
-                isLoaded ? "d-none" : "d-flex"
-              }`}
+            <Box
+              flex="auto"
+              justifyContent="center"
+              alignItems="center"
+              sx={{ display: isLoaded ? "none" : "flex" }}
             >
-              <Spinner animation="grow" />
-            </div>
+              <CircularProgress />
+            </Box>
           )}
           {isInThePast() && raceResult.Results !== undefined && (
-            <div className={`card-body ${!isLoaded ? "d-none" : "d-flex"}`}>
+            <Box
+              flex="auto"
+              sx={{ display: !isLoaded ? "none" : "flex" }}
+            >
               <RaceResult
                 raceName={props.event.raceName}
                 result={raceResult.Results}
                 championship={championshipStanding}
                 constructors={constructorsStanding}
               />
-            </div>
+            </Box>
           )}
         </div>
-      </div>
-    </div>
+      </Card>
+    </Grid>
   );
 };
 

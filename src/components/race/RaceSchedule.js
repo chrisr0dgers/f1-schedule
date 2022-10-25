@@ -1,10 +1,11 @@
+import { Box } from "@mui/material";
 import style from "./RaceSchedule.module.scss";
 
 const RaceSchedule = (props) => {
   return (
-    <div className="card-body">
-      <h4 className="mb-3">Schedule</h4>
-      <div className="d-sm-flex pb-md-3">
+    <Box flex={'auto'}>
+      <Box component={'h4'} mb={2}>Schedule</Box>
+      <Box sx={{pb: 2, display: {sm:'flex'}}}>
         <div className={style["raceSchedule_practice"]}>
           <p>
             <strong>FP1:</strong> {props.schedule.fp1}
@@ -13,9 +14,9 @@ const RaceSchedule = (props) => {
             <strong>FP2:</strong> {props.schedule.fp2}
           </p>
           {props.schedule.fp3 && (
-            <p className="mb-0">
+            <Box component={'p'} mb={0}>
               <strong>FP3:</strong> {props.schedule.fp3}
-            </p>
+            </Box>
           )}
           {props.schedule.sprintRace && (
             <p>
@@ -31,8 +32,8 @@ const RaceSchedule = (props) => {
             <strong>Race:</strong> {props.schedule.raceTime}
           </p>
         </div>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

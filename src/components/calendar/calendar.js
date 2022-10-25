@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Event from "../race/Race";
-import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import Grid from "@mui/material/Grid";
+import { Button } from "@mui/material";
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
@@ -24,34 +25,29 @@ const Calendar = () => {
 
   if (isLoading) {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 mx-auto text-center mt-5">
-            <Spinner animation="grow" />
-          </div>
-        </div>
-      </div>
+      <Grid container sx={{ px: 3 }}>
+        <Grid md="6" textAlign="center" sx={{ mx: "auto", mt: 5 }}>
+          <Spinner animation="grow" />
+        </Grid>
+      </Grid>
     );
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-7 col-md-9 mx-auto px-0 pt-3">
-          <Button
-            className="mx-auto d-block"
-            href={`#${lastRount}`}
-            variant="primary"
-          >
-            Next Race
-          </Button>
-        </div>
-      </div>
+    <Grid containerjustifyContent="center" sx={{ mx: "auto", px: 3 }}>
+      <Grid item lg={7} md={8} xs={12} mt={2}>
+        <Button
+          sx={{ mx: "auto", display: "block", textAlign: "center" }}
+          href={`#${lastRount}`}
+          variant="contained"
+        >
+          Next Race
+        </Button>
+      </Grid>
       {events.map((event) => {
         return <Event key={event.raceName} event={event} />;
       })}
-    </div>
+    </Grid>
   );
 };
-
 export default Calendar;

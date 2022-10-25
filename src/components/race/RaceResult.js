@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import RaceChampionship from "./RaceChampionship";
+import { Box, Typography } from "@mui/material";
 
 const RaceResult = (props) => {
   // Bootstrap modal
@@ -17,8 +18,10 @@ const RaceResult = (props) => {
   // Bootstrap modal end
 
   return (
-    <div className="w-100">
-      <h4 className="mb-3">Race Result</h4>
+    <Box sx={{ width: 1 }}>
+      <Box component={"h4"} sx={{ mb: 2 }}>
+        Race Result
+      </Box>
       <div>
         {props.result.slice(0, 3).map((driver) => {
           return (
@@ -37,13 +40,14 @@ const RaceResult = (props) => {
             </div>
           );
         })}
-        <p
-          className={`${style.result_fullResult} mb-0 mt-3`}
-          variant="primary"
+        <Typography
+          paragraph={true}
+          sx={{ mb: 0, mt: 2 }}
+          className={`${style.result_fullResult}`}
           onClick={handleShow}
         >
           Full standings
-        </p>
+        </Typography>
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -82,7 +86,7 @@ const RaceResult = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </Box>
   );
 };
 

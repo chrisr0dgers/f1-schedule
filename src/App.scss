@@ -3,3 +3,9 @@
 .container {
   padding: 0 30px;
 }
+
+a {
+  &:hover {
+    color: #fff;
+  }
+}

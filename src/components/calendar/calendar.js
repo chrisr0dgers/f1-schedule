@@ -3,6 +3,7 @@ import axios from "axios";
 import Event from "../race/Race";
 import Grid from "@mui/material/Grid";
 import { Button, CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
@@ -46,6 +47,9 @@ const Calendar = () => {
       {events.map((event) => {
         return <Event key={event.raceName} event={event} />;
       })}
+      <Grid item lg={7} md={8} xs={12} textAlign="center" pb={2}>
+        <Link to={"about"}>About</Link>
+      </Grid>
     </Grid>
   );
 };

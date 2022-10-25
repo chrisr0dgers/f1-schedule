@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Event from "../race/Race";
-import Spinner from "react-bootstrap/Spinner";
 import Grid from "@mui/material/Grid";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 const Calendar = () => {
   const [events, setEvents] = useState([]);
@@ -27,7 +26,7 @@ const Calendar = () => {
     return (
       <Grid container sx={{ px: 3 }}>
         <Grid md="6" textAlign="center" sx={{ mx: "auto", mt: 5 }}>
-          <Spinner animation="grow" />
+          <CircularProgress />
         </Grid>
       </Grid>
     );

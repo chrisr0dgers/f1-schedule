@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Spinner from "react-bootstrap/Spinner";
 import RaceHeader from "./RaceHeader";
 import style from "./race.module.scss";
 import RaceResult from "./RaceResult";

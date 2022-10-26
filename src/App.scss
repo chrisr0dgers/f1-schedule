@@ -4,6 +4,12 @@
   padding: 0 30px;
 }
 
+.btn-contained {
+  &:hover {
+    color: #fff;
+  }
+}
+
 // a {
 //   &:hover {
 //     color: #fff;

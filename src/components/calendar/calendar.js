@@ -37,6 +37,7 @@ const Calendar = () => {
     <Grid containerjustifyContent="center" sx={{ mx: "auto", px: 3 }}>
       <Grid item lg={7} md={8} xs={12} mt={2}>
         <Button
+          className="btn-contained"
           sx={{ mx: "auto", display: "block", textAlign: "center" }}
           href={`#${lastRount}`}
           variant="contained"

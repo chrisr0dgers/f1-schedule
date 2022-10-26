@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Calendar from "./components/calendar/calendar";
 import "./App.scss";
 import { Grid } from "@mui/material";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./about";
 
 function App() {

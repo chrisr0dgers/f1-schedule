@@ -1,5 +1,4 @@
 import { Grid, Typography } from "@mui/material";
-import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 const About = () => {

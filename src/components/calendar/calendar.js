@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { Button, CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Calendar = () => {
+function Calendar() {
   const [events, setEvents] = useState([]);
   const [lastRount, setLastRound] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ const Calendar = () => {
   if (isLoading) {
     return (
       <Grid container sx={{ px: 3 }}>
-        <Grid md="6" textAlign="center" sx={{ mx: "auto", mt: 5 }}>
+        <Grid textAlign="center" sx={{ mx: "auto", mt: 5, md: 6 }}>
           <CircularProgress />
         </Grid>
       </Grid>
@@ -34,7 +34,7 @@ const Calendar = () => {
   }
 
   return (
-    <Grid containerjustifyContent="center" sx={{ mx: "auto", px: 3 }}>
+    <Grid container justifyContent="center" sx={{ mx: "auto", px: 3 }}>
       <Grid item lg={7} md={8} xs={12} mt={2}>
         <Button
           className="btn-contained"

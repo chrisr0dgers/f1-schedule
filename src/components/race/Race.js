@@ -18,11 +18,11 @@ const Race = (props) => {
 
   const endpoints = [
     // Results for current round
-    `https://ergast.com/api/f1/2022/${props.event.round}/results.json`,
+    `https://api.jolpi.ca/ergast/f1/2025/${props.event.round}/results`,
     // Driver standings for current round
-    `https://ergast.com/api/f1/2022/${props.event.round}/driverStandings.json`,
+    `https://api.jolpi.ca/ergast/f1/2025/${props.event.round}/driverStandings`,
     // Contructor standing for current round
-    `https://ergast.com/api/f1/2022/${props.event.round}/constructorStandings.json`,
+    `https://api.jolpi.ca/ergast/f1/2025/${props.event.round}/constructorStandings`,
   ];
 
   // Get race result if event has passed
@@ -77,7 +77,9 @@ const Race = (props) => {
   // Race schedule
   var raceSchedule = {
     fp1: getTime(props.event.FirstPractice.time),
-    fp2: getTime(props.event.SecondPractice.time),
+    ...(props.event.SecondPractice && {
+      fp2: getTime(props.event.SecondPractice.time),
+    }),
     ...(props.event.ThirdPractice && {
       fp3: getTime(props.event.ThirdPractice.time),
     }),

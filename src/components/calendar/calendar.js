@@ -12,8 +12,8 @@ function Calendar() {
 
   useEffect(() => {
     const endpoints = [
-      `https://ergast.com/api/f1/current.json`,
-      `https://ergast.com/api/f1/current/last/results.json`,
+      `https://api.jolpi.ca/ergast/f1/current`,
+      `https://api.jolpi.ca/ergast/f1/current/last/results/`,
     ];
     Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then(([{ data: currentSeason }, { data: lastRaceResult }]) => {

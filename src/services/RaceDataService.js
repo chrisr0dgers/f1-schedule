@@ -3,7 +3,7 @@ import axios from "axios";
 export async function getSeasonInfo() {
     try {
       const response = await axios.get(
-        "https://ergast.com/api/f1/current.json"
+        "https://api.jolpi.ca/ergast/f1/current"
       );
       return response.data.MRData.RaceTable.Races;
     } catch (error) {
@@ -14,7 +14,7 @@ export async function getSeasonInfo() {
 export async function getLastRound() {
     try {
       const response = await axios.get(
-        "https://ergast.com/api/f1/current/last/results.json"
+        "https://api.jolpi.ca/ergast/f1/current/last/results/"
       );
       return +response.data.MRData.RaceTable.round + 1;
     } catch (error) {
